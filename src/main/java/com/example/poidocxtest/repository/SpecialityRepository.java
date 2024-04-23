@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface SpecialityRepository extends JpaRepository<Long, Speciality> {
+public interface SpecialityRepository extends JpaRepository<Speciality, Long> {
     Optional<Speciality> findByGroup (Group group);
+    Optional<Speciality> findByTitle (String title);
 }

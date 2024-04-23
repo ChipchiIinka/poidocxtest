@@ -5,9 +5,13 @@ import com.example.poidocxtest.repository.*;
 import com.example.poidocxtest.service.mapper.util.UtilMapper;
 import com.example.poidocxtest.util.ExaminationSheetCreator;
 import lombok.RequiredArgsConstructor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.xmlbeans.XmlException;
 import org.springframework.stereotype.Service;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +25,7 @@ public class UtilService {
     private final SpecialityRepository specialityRepository;
     private final UtilMapper evidenceMapper;
 
-    public void makeExaminationSheet (String groupCode, long subjectId, long secretaryId) throws IOException {
+    public void makeExaminationSheet (String groupCode, long subjectId, long secretaryId) throws Exception {
 
         Group group = groupRepository.findByGroupCode(groupCode)
                 .orElseThrow(() -> new RuntimeException("group not found"));
@@ -38,12 +42,14 @@ public class UtilService {
         Secretary secretary = secretaryRepository.findById(secretaryId)
                 .orElseThrow(() -> new RuntimeException("secretary not found"));
 
-        ExaminationSheetCreator examinationSheetCreator = new ExaminationSheetCreator(
-                evidenceMapper.toDataDto(decanter,faculty,speciality,subject,group,department,secretary),
-                subject.getControlType());
-        examinationSheetCreator.createExaminationSheet();
-
+        ExaminationSheetCreator examinationSheetCreator =
+                new ExaminationSheetCreator(
+                        subject.getControlType(),
+                        evidenceMapper.toDataDto(decanter,faculty,speciality,subject,group,department,secretary));
+        XWPFDocument document = examinationSheetCreator.createExaminationSheet();
+        OutputStream outputStream = new FileOutputStream("C:/Temporary/examination_sheet.docx");
+        document.write(outputStream);
+        document.close();
     }
-
 
 }

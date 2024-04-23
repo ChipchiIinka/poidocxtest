@@ -19,4 +19,8 @@ public abstract class Human {
 
     @Column(name = "patronymic")
     private String patronymic;
+
+    public String makeInitials (){
+        return  surname + " " + name.charAt(0) + ". " + patronymic.charAt(0) + ".";
+    }
 }

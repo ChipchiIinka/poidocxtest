@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface GroupRepository extends JpaRepository<Long, Group> {
+public interface GroupRepository extends JpaRepository<Group, Long> {
     Optional<Group> findByGroupCode (String groupCode);
 }

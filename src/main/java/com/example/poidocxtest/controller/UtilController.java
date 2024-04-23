@@ -13,7 +13,7 @@ public class UtilController {
     private final UtilService service;
 
     @GetMapping
-    public void getAllData (String groupCode, long subjectId, long secretaryId) throws IOException {
+    public void getAllData (String groupCode, long subjectId, long secretaryId) throws Exception {
         service.makeExaminationSheet(groupCode, subjectId, secretaryId);
     }
 }

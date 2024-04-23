@@ -24,10 +24,6 @@ public class UtilMapper {
         return (double) (gradeCounter(grades, grade))/grades.size()*100;
     }
 
-    private String makeInitials (Human human){
-        return  human.getSurname() + " " + human.getName().charAt(0) + ". " + human.getPatronymic().charAt(0) + ".";
-    }
-
     private String makeStudyYears (){
         if (Month.JANUARY.getValue() <= LocalDate.now().getMonth().getValue() &&
                 LocalDate.now().getMonth().getValue() < Month.SEPTEMBER.getValue()){
@@ -41,7 +37,7 @@ public class UtilMapper {
                                           Group group, Department department, Secretary secretary){
         return ExaminationSheetDto.builder()
                 .facultyShortName(faculty.getShortTitle())
-                .deanName(makeInitials(decanter))
+                .deanName(decanter.makeInitials())
                 .facultyFullName(faculty.getTitle())
                 .specialityCode(speciality.getSpecialityCode())
                 .period(LocalDate.now().getMonth().name())
@@ -50,8 +46,8 @@ public class UtilMapper {
                 .controlType(subject.getControlType().getTitle())
                 .groupCode(group.getGroupCode())
                 .students(toStudentDtoList(group.getStudents().stream().toList(), subject))
-                .departmentHeadName(makeInitials(department.getDepartmentSuperintendent()))
-                .secretaryName(makeInitials(secretary))
+                .departmentHeadName(department.getDepartmentSuperintendent().makeInitials())
+                .secretaryName(secretary.makeInitials())
                 .build();
     }
 

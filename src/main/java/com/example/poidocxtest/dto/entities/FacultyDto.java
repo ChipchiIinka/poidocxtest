@@ -21,7 +21,7 @@ public class FacultyDto {
     private String decanterName;
 
     @JsonProperty("specialities")
-    private Set<String> specialitiesName;
+    private Set<String> specialitiesTitles;
 
     @JsonProperty("teachers")
     private Set<String> teachersName;

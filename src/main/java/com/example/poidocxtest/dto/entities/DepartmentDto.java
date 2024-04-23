@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -18,12 +19,12 @@ public class DepartmentDto {
     private String title;
 
     @JsonProperty("teachers")
-    private Set<Teacher> teachers;
+    private List<String> teachers;
 
     @JsonProperty("department_superintendent")
     private String departmentSuperintendentName;
 
     @OneToMany
     @JoinColumn(name = "specialities")
-    private Set<String> specialityNames;
+    private Set<String> specialityTitles;
 }

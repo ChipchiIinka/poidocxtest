@@ -19,5 +19,5 @@ public class DecanterDto {
     private String patronymic;
 
     @JsonProperty("faculty")
-    private String facultyName;
+    private String facultyTitle;
 }

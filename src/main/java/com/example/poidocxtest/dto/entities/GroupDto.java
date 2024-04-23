@@ -15,7 +15,7 @@ public class GroupDto {
     private String groupCode;
 
     @JsonProperty("speciality")
-    private String specialityName;
+    private String specialityTitle;
 
     @JsonProperty("students")
     private Set<String> studentNames;
