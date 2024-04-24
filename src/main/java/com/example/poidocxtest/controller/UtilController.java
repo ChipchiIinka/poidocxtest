@@ -3,6 +3,8 @@ package com.example.poidocxtest.controller;
 import com.example.poidocxtest.dto.entities.*;
 import com.example.poidocxtest.service.UtilService;
 import com.example.poidocxtest.service.entities.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,14 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 @Slf4j
 @Validated
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Ведомость", description = "Сформировать и скачать ведомость")
 public class UtilController {
     private final UtilService service;
     private final DecanterService decanterService;
@@ -33,6 +32,7 @@ public class UtilController {
     private final SubjectsService subjectsService;
     private final TeacherService teacherService;
 
+    @Operation(summary = "Сформировать и скачать ведомость", description = "ведомоость")
     @GetMapping
     public ResponseEntity<ByteArrayResource> getAllData (String groupCode, long subjectId, long secretaryId) throws Exception {
         return service.makeExaminationSheet(groupCode, subjectId, secretaryId);
