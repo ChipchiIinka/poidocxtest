@@ -1,11 +1,14 @@
 package com.example.poidocxtest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,15 +29,30 @@ public class Faculty {
     @Column(name = "short_title")
     private String shortTitle;
 
-    @ManyToOne
-    @JoinColumn(name = "decanter")
+    @OneToOne
+//    @JoinTable(
+//            name = "faculty_decanter",
+//            joinColumns = @JoinColumn(name = "decanter_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+//    )
+    @JsonIgnoreProperties("faculty")
     private Decanter decanter;
 
     @OneToMany
-    @JoinColumn(name = "specialities")
-    private Set<Speciality> specialities;
+//    @JoinTable(
+//            name = "faculty_specialities",
+//            joinColumns = @JoinColumn(name = "speciality_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+//    )
+    @JsonIgnoreProperties("faculty")
+    private List<Speciality> specialities  = new ArrayList<>();
 
     @OneToMany
-    @JoinColumn(name = "teachers")
-    private Set<Teacher> teachers;
+//    @JoinTable(
+//            name = "faculty_teachers",
+//            joinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+//    )
+    @JsonIgnoreProperties("faculty")
+    private List<Teacher> teachers  = new ArrayList<>();
 }

@@ -3,12 +3,21 @@ package com.example.poidocxtest.controller;
 import com.example.poidocxtest.dto.entities.*;
 import com.example.poidocxtest.service.UtilService;
 import com.example.poidocxtest.service.entities.*;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+@Slf4j
+@Validated
 @RestController
 @RequiredArgsConstructor
 public class UtilController {
@@ -25,17 +34,18 @@ public class UtilController {
     private final TeacherService teacherService;
 
     @GetMapping
-    public void getAllData (String groupCode, long subjectId, long secretaryId) throws Exception {
-        service.makeExaminationSheet(groupCode, subjectId, secretaryId);
+    public ResponseEntity<ByteArrayResource> getAllData (String groupCode, long subjectId, long secretaryId) throws Exception {
+        return service.makeExaminationSheet(groupCode, subjectId, secretaryId);
     }
+
 
 //
 //    @PostMapping
-//    public void createAllInOne(@RequestBody DecanterDto decD, @RequestBody DepartmentDto depD,
-//                               @RequestBody FacultyDto facD, @RequestBody GroupDto groD,
-//                               @RequestBody RecordBookDto rBD, @RequestBody SecretaryDto secD,
-//                               @RequestBody SpecialityDto speD, @RequestBody StudentDto stuD,
-//                               @RequestBody SubjectsDto subD, @RequestBody TeacherDto teaD){
+//    public void createAllInOne(@RequestBody @Valid DecanterDto decD, @RequestBody @Valid DepartmentDto depD,
+//                               @RequestBody @Valid FacultyDto facD, @RequestBody @Valid GroupDto groD,
+//                               @RequestBody @Valid RecordBookDto rBD, @RequestBody @Valid SecretaryDto secD,
+//                               @RequestBody @Valid SpecialityDto speD, @RequestBody @Valid StudentDto stuD,
+//                               @RequestBody @Valid SubjectsDto subD, @RequestBody @Valid TeacherDto teaD){
 //        decanterService.create(decD);
 //        departmentService.create(depD);
 //        facultyService.create(facD);

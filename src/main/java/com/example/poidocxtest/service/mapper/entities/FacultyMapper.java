@@ -22,10 +22,10 @@ public class FacultyMapper {
                 .decanterName(faculty.getDecanter().makeInitials())
                 .specialitiesTitles(faculty.getSpecialities().stream()
                         .map(Speciality::getTitle)
-                        .collect(Collectors.toSet()))
+                        .toList())
                 .teachersName(faculty.getTeachers().stream()
                         .map(Teacher::makeInitials)
-                        .collect(Collectors.toSet()))
+                        .toList())
                 .build();
     }
 

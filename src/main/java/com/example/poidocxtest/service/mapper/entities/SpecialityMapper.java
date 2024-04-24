@@ -20,7 +20,7 @@ public class SpecialityMapper {
                 .specialityCode(speciality.getSpecialityCode())
                 .groupCodes(speciality.getGroups().stream()
                         .map(Group::getGroupCode)
-                        .collect(Collectors.toSet()))
+                        .toList())
                 .departmentTitle(speciality.getDepartment().getTitle())
                 .facultyTitle(speciality.getFaculty().getTitle())
                 .build();

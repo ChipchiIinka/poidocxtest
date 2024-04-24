@@ -21,7 +21,7 @@ public class SubjectsMapper {
                 .controlType(subjects.getControlType().getTitle())
                 .semester(subjects.getSemester())
                 .teacherName(subjects.getTeacher().makeFullName())
-                .recordBookId(subjects.getRecordBook().getId())
+                .recordBookNumber(subjects.getRecordBook().getNumber())
                 .grade(subjects.getGrade().getName())
                 .build();
     }

@@ -2,6 +2,7 @@ package com.example.poidocxtest.entity;
 
 import com.example.poidocxtest.entity.enums.ControlType;
 import com.example.poidocxtest.entity.enums.Grade;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,11 +34,21 @@ public class Subjects {
     private Integer semester;
 
     @ManyToOne
-    @JoinColumn(name = "teacher")
+//    @JoinTable(
+//            name = "teacher_subjects",
+//            joinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "id")
+//    )
+    @JsonIgnoreProperties("subjects")
     private Teacher teacher;
 
     @ManyToOne
-    @JoinColumn(name = "record_book")
+//    @JoinTable(
+//            name = "record_book_subjects",
+//            joinColumns = @JoinColumn(name = "record_book_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "id")
+//    )
+    @JsonIgnoreProperties("subjects")
     private RecordBook recordBook;
 
     @Column(name = "grade")

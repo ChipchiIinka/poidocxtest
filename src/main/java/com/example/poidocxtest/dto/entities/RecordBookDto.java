@@ -5,18 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
 @Builder
 @AllArgsConstructor
 public class RecordBookDto {
-    @JsonProperty("id")
-    private String id;
+    @JsonProperty("number")
+    private String number;
 
     @JsonProperty("student")
     private String studentName;
 
     @JsonProperty("subjects")
-    private Set<String> subjectsTitle;
+    private List<String> subjectsTitle;
 }

@@ -7,6 +7,7 @@ import com.example.poidocxtest.repository.FacultyRepository;
 import com.example.poidocxtest.repository.GroupRepository;
 import com.example.poidocxtest.repository.SpecialityRepository;
 import com.example.poidocxtest.service.mapper.entities.SpecialityMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class SpecialityService {
         speciality.setGroups(dto.getGroupCodes().stream()
                 .map(code -> groupRepo.findByGroupCode(code)
                 .orElseThrow(() -> new RuntimeException("group not found")))
-                .collect(Collectors.toSet()));
+                .toList());
         speciality.setDepartment(departmentRepo.findByTitle(dto.getDepartmentTitle())
                 .orElseThrow(() -> new RuntimeException("department not found")));
         speciality.setFaculty(facultyRepo.findByTitle(dto.getFacultyTitle())

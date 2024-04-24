@@ -6,6 +6,7 @@ import com.example.poidocxtest.repository.RecordBookRepository;
 import com.example.poidocxtest.repository.SubjectsRepository;
 import com.example.poidocxtest.repository.TeacherRepository;
 import com.example.poidocxtest.service.mapper.entities.SubjectsMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,7 @@ public class SubjectsService {
                 dto.getTeacherName().split(" ")[1],
                 dto.getTeacherName().split(" ")[2])
                 .orElseThrow(() -> new RuntimeException("Teacher not found")));
-        subject.setRecordBook(recordBookRepo.findById(dto.getRecordBookId())
+        subject.setRecordBook(recordBookRepo.findByNumber(dto.getRecordBookNumber())
                 .orElseThrow(() -> new RuntimeException("Record Book not found")));
 
         subjectsRepo.save(subject);

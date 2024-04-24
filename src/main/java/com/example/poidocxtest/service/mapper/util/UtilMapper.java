@@ -17,22 +17,6 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UtilMapper {
 
-    private long gradeCounter(List<Grade> grades, Grade grade){
-        return grades.stream().map(g -> Objects.equals(g, grade)).count();
-    }
-
-    private double gradeCounterPercent (List<Grade> grades, Grade grade){
-        return (double) (gradeCounter(grades, grade))/grades.size()*100;
-    }
-
-    private String makeStudyYears (){
-        if (Month.JANUARY.getValue() <= LocalDate.now().getMonth().getValue() &&
-                LocalDate.now().getMonth().getValue() < Month.SEPTEMBER.getValue()){
-            return (LocalDate.now().getYear()-1) + " - " + LocalDate.now().getYear();
-        }
-        return (LocalDate.now().getYear()) + " - " + (LocalDate.now().getYear() + 1);
-    }
-
     public ExaminationSheetDto toDataDto (Decanter decanter, Faculty faculty,
                                           Speciality speciality, Subjects subject,
                                           Group group, Department department, Secretary secretary){
@@ -41,7 +25,7 @@ public class UtilMapper {
                 .deanName(decanter.makeInitials())
                 .facultyFullName(faculty.getTitle())
                 .specialityCode(speciality.getSpecialityCode())
-                .period(LocalDate.now().getMonth().name())
+                .period(makeCorrectPeriod())
                 .academicYear(makeStudyYears())
                 .academicDisciplineTitle(subject.getTitle())
                 .controlType(subject.getControlType().getTitle())
@@ -57,10 +41,65 @@ public class UtilMapper {
         for (Student student : students) {
             studentSheetDto.add(StudentSheetDto.builder()
                     .fullName(student.getSurname() + " " + student.getName() + " " + student.getPatronymic())
-                    .recordBookNumber(student.getRecordBook().getId())
+                    .recordBookNumber(student.getRecordBook().getNumber())
                     .grade(subject.getGrade().getName())
                     .build());
         }
         return studentSheetDto;
+    }
+
+    //Подсчет всех оценок
+    private long gradeCounter(List<Grade> grades, Grade grade){
+        return grades.stream().map(g -> Objects.equals(g, grade)).count();
+    }
+
+    //Подсчет процента оценок
+    private double gradeCounterPercent (List<Grade> grades, Grade grade){
+        return (double) (gradeCounter(grades, grade))/grades.size()*100;
+    }
+
+    //Создание корректного названия периода
+    private String makeCorrectPeriod(){
+        switch (LocalDate.now().getMonth()){
+            case JANUARY -> {
+                return "январский";
+            }
+            case FEBRUARY -> {
+                return "февральский";
+            }
+            case MARCH -> {
+                return "мартский";
+            }
+            case APRIL -> {
+                return "апрельский";
+            }
+            case MAY -> {
+                return "майский";
+            }
+            case JUNE -> {
+                return "июньский";
+            }
+            case SEPTEMBER -> {
+                return "сентябрьский";
+            }
+            case OCTOBER -> {
+                return "октябрьский";
+            }
+            case NOVEMBER -> {
+                return "ноябрьский";
+            }
+            default -> {
+                return "декабрьский";
+            }
+        }
+    }
+
+    //создание правильного отображения учебного года
+    private String makeStudyYears (){
+        if (Month.JANUARY.getValue() <= LocalDate.now().getMonth().getValue() &&
+                LocalDate.now().getMonth().getValue() < Month.SEPTEMBER.getValue()){
+            return (LocalDate.now().getYear()-1) + " - " + LocalDate.now().getYear();
+        }
+        return (LocalDate.now().getYear()) + " - " + (LocalDate.now().getYear() + 1);
     }
 }

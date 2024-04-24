@@ -1,0 +1,111 @@
+insert into decanter (id, name, patronymic, surname)
+values (1,'Декан', 'Декан', 'Декан');
+
+insert into department (id, title, department_superintendent_id)
+values (1, 'Кафедра Программирования', null);
+
+insert into faculty (id, short_title, title, decanter_id)
+VALUES (1, 'ФАИТ', 'Факультет Автоматизированых Информационных Систем', 1);
+
+update decanter set faculty_id = 1 where id = 1;
+
+insert into record_book (id, number)
+VALUES (1, '0001Q');
+insert into record_book (id, number)
+VALUES (2, '0002Q');
+insert into record_book (id, number)
+VALUES (3, '0003Q');
+insert into record_book (id, number)
+VALUES (4, '0004Q');
+insert into record_book (id, number)
+VALUES (5, '0005Q');
+
+insert into speciality (id, speciality_code, title)
+VALUES (1, '23ИП', 'Программная Инженерия');
+
+insert into department_specialities (department_id, specialities_id)
+VALUES (1, 1);
+
+insert into faculty_specialities (faculty_id, specialities_id)
+VALUES (1, 1);
+
+insert into study_group (id, group_code, speciality_id)
+VALUES (1, '23ИП1б', 1);
+
+insert into student (id, name, patronymic, surname, group_id, record_book_id)
+VALUES (1, 'Студент1', 'Студент1', 'Студент1', 1, 1);
+insert into student (id, name, patronymic, surname, group_id, record_book_id)
+VALUES (2, 'Студент2', 'Студент2', 'Студент2', 1, 2);
+insert into student (id, name, patronymic, surname, group_id, record_book_id)
+VALUES (3, 'Студент3', 'Студент3', 'Студент3', 1, 3);
+insert into student (id, name, patronymic, surname, group_id, record_book_id)
+VALUES (4, 'Студент4', 'Студент4', 'Студент4', 1, 4);
+insert into student (id, name, patronymic, surname, group_id, record_book_id)
+VALUES (5, 'Студент5', 'Студент5', 'Студент5', 1, 5);
+
+insert into speciality_groups (speciality_id, groups_id)
+VALUES (1, 1);
+
+insert into study_group_students (group_id, students_id)
+VALUES (1, 1);
+insert into study_group_students (group_id, students_id)
+VALUES (1, 2);
+insert into study_group_students (group_id, students_id)
+VALUES (1, 3);
+insert into study_group_students (group_id, students_id)
+VALUES (1, 4);
+insert into study_group_students (group_id, students_id)
+VALUES (1, 5);
+
+insert into teacher (id, name, patronymic, surname, position, department_id, faculty_id)
+VALUES (1, 'Учитель', 'Учитель' , 'Учитель', 1, 1, 1);
+insert into teacher (id, name, patronymic, surname, position, department_id, faculty_id)
+VALUES (2, 'Председатель', 'Председатель', 'Председатель', 0, 1, 1);
+
+insert into subjects (id, control_type, grade, hours, semester, title, record_book_id, teacher_id)
+VALUES (1, 0, 0, 120, 4, 'Программирование C++', 1, 1);
+insert into subjects (id, control_type, grade, hours, semester, title, record_book_id, teacher_id)
+VALUES (2, 0, 2, 120, 4, 'Программирование C++', 2, 1);
+insert into subjects (id, control_type, grade, hours, semester, title, record_book_id, teacher_id)
+VALUES (3, 0, 0, 120, 4, 'Программирование C++', 3, 1);
+insert into subjects (id, control_type, grade, hours, semester, title, record_book_id, teacher_id)
+VALUES (4, 0, 1, 120, 4, 'Программирование C++', 4, 1);
+insert into subjects (id, control_type, grade, hours, semester, title, record_book_id, teacher_id)
+VALUES (5, 0, 2, 120, 4, 'Программирование C++', 5, 1);
+
+insert into record_book_subjects (record_book_id, subjects_id)
+values (1, 1);
+insert into record_book_subjects (record_book_id, subjects_id)
+values (2, 2);
+insert into record_book_subjects (record_book_id, subjects_id)
+values (3, 3);
+insert into record_book_subjects (record_book_id, subjects_id)
+values (4, 4);
+insert into record_book_subjects (record_book_id, subjects_id)
+values (5, 5);
+
+insert into teacher_subjects (teacher_id, subjects_id)
+VALUES (1, 1);
+insert into teacher_subjects (teacher_id, subjects_id)
+VALUES (1, 2);
+insert into teacher_subjects (teacher_id, subjects_id)
+VALUES (1, 3);
+insert into teacher_subjects (teacher_id, subjects_id)
+VALUES (1, 4);
+insert into teacher_subjects (teacher_id, subjects_id)
+VALUES (1, 5);
+
+insert into department_teachers (department_id, teachers_id)
+VALUES (1, 1);
+insert into department_teachers (department_id, teachers_id)
+VALUES (1, 2);
+
+insert into faculty_teachers (faculty_id, teachers_id)
+values (1, 1);
+insert into faculty_teachers (faculty_id, teachers_id)
+values (1, 2);
+
+update department set department_superintendent_id = 2 where id = 1;
+
+insert into secretary (id, name, patronymic, surname)
+VALUES (1, 'Секретарь', 'Секретарь', 'Секретарь');

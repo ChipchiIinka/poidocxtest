@@ -6,6 +6,7 @@ import com.example.poidocxtest.repository.RecordBookRepository;
 import com.example.poidocxtest.repository.StudentRepository;
 import com.example.poidocxtest.repository.SubjectsRepository;
 import com.example.poidocxtest.service.mapper.entities.RecordBookMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class RecordBookService {
         return recordBookMapper.toDtoList(recordBookRepo.findAll());
     }
 
-    public RecordBookDto findById(String id){
+    public RecordBookDto findById(long id){
         return recordBookMapper.toDto(recordBookRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("record book not found")));
     }
@@ -32,7 +33,7 @@ public class RecordBookService {
     public void create(RecordBookDto dto){
         RecordBook recordBook = new RecordBook();
 
-        recordBook.setId(dto.getId());
+        recordBook.setNumber(dto.getNumber());
         recordBook.setStudent(studentRepository.findBySurnameAndNameAndPatronymic(
                 dto.getStudentName().split(" ")[0],
                 dto.getStudentName().split(" ")[1],
@@ -41,7 +42,7 @@ public class RecordBookService {
         recordBook.setSubjects(dto.getSubjectsTitle().stream()
                 .map(s -> subjectsRepository.findByTitle(s)
                         .orElseThrow(() -> new RuntimeException("subject not found")))
-                .collect(Collectors.toSet()));
+                .toList());
 
         recordBookRepo.save(recordBook);
     }

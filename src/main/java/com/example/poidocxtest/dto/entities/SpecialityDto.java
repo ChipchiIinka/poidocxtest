@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -18,7 +19,7 @@ public class SpecialityDto {
     private String specialityCode;
 
     @JsonProperty("groups")
-    private Set<String> groupCodes;
+    private List<String> groupCodes;
 
     @JsonProperty("department")
     private String departmentTitle;

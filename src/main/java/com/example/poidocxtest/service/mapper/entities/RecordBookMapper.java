@@ -16,11 +16,11 @@ public class RecordBookMapper {
 
     public RecordBookDto toDto (RecordBook recordBook){
         return RecordBookDto.builder()
-                .id(recordBook.getId())
+                .number(recordBook.getNumber())
                 .studentName(recordBook.getStudent().makeInitials())
                 .subjectsTitle(recordBook.getSubjects().stream()
                         .map(Subjects::getTitle)
-                        .collect(Collectors.toSet()))
+                        .toList())
                 .build();
     }
 }

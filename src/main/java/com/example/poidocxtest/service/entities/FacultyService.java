@@ -7,6 +7,7 @@ import com.example.poidocxtest.repository.FacultyRepository;
 import com.example.poidocxtest.repository.SpecialityRepository;
 import com.example.poidocxtest.repository.TeacherRepository;
 import com.example.poidocxtest.service.mapper.entities.FacultyMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -42,12 +43,12 @@ public class FacultyService {
         faculty.setSpecialities(dto.getSpecialitiesTitles().stream()
                 .map(s -> specialityRepo.findByTitle(s)
                         .orElseThrow(() -> new RuntimeException("speciality not found")))
-                .collect(Collectors.toSet()));
+                .toList());
         faculty.setTeachers(dto.getTeachersName().stream()
                 .map(teacher -> teacherRepo.findBySurnameAndNameAndPatronymic(
                                 teacher.split(" ")[0], teacher.split(" ")[1], teacher.split(" ")[2])
                         .orElseThrow(() -> new RuntimeException("teacher not found")))
-                .collect(Collectors.toSet()));
+                .toList());
 
         facultyRepo.save(faculty);
     }

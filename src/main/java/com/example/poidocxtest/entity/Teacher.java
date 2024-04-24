@@ -1,12 +1,15 @@
 package com.example.poidocxtest.entity;
 
 import com.example.poidocxtest.entity.enums.Position;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -39,25 +42,25 @@ public class Teacher{
 //            joinColumns = @JoinColumn(name = "department_id", referencedColumnName = "id"),
 //            inverseJoinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "id")
 //    )
-    @JoinColumn(name = "department")
+    @JsonIgnoreProperties("teachers")
     private Department department;
 
     @OneToMany
 //    @JoinTable(
 //            name = "teacher_subjects",
-//            joinColumns = @JoinColumn(name = "subjects_id", referencedColumnName = "id"),
+//            joinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "id"),
 //            inverseJoinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "id")
 //    )
-    @JoinColumn(name = "subjects")
-    private Set<Subjects> subjects;
+    @JsonIgnoreProperties("teacher")
+    private List<Subjects> subjects  = new ArrayList<>();;
 
     @ManyToOne
 //    @JoinTable(
-//            name = "shopkeepers_shops",
-//            joinColumns = @JoinColumn(name = "shop_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "shopkeeper_id", referencedColumnName = "id")
+//            name = "faculty_teachers",
+//            joinColumns = @JoinColumn(name = "faculty_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "id")
 //    )
-    @JoinColumn(name = "faculty")
+    @JsonIgnoreProperties("teachers")
     private Faculty faculty;
 
     public String makeInitials(){

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -29,7 +30,7 @@ public class TeacherDto {
     private String departmentTitle;
 
     @JsonProperty("subjects")
-    private Set<String> subjectsTitle;
+    private List<String> subjectsTitle;
 
     @JsonProperty("faculty")
     private String facultyTitle;

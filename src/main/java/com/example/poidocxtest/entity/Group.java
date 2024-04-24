@@ -1,12 +1,14 @@
 package com.example.poidocxtest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,10 +26,21 @@ public class Group {
     private String groupCode;
 
     @ManyToOne
-    @JoinColumn(name = "speciality")
+//    @JoinTable(
+//            name = "speciality_groups",
+//            joinColumns = @JoinColumn(name = "speciality_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id")
+//    )
+    @JsonIgnoreProperties("groups")
     private Speciality speciality;
 
-    @OneToMany
-    @JoinColumn(name = "students")
-    private Set<Student> students;
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "group_students",
+//            joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id")
+//    )
+    @JsonIgnoreProperties("students")
+    private List<Student> students = new ArrayList<>();
 }

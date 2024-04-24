@@ -26,5 +26,5 @@ public class DepartmentDto {
 
     @OneToMany
     @JoinColumn(name = "specialities")
-    private Set<String> specialityTitles;
+    private List<String> specialityTitles;
 }

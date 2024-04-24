@@ -27,7 +27,7 @@ public class SubjectsDto {
     private String teacherName;
 
     @JsonProperty("record_book")
-    private String recordBookId;
+    private String recordBookNumber;
 
     @JsonProperty("grade")
     private String grade;

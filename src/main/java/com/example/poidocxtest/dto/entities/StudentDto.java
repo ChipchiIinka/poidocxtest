@@ -19,7 +19,7 @@ public class StudentDto {
     private String patronymic;
 
     @JsonProperty("record_book")
-    private String recordBookId;
+    private String recordBookNumber;
 
     @JsonProperty("group")
     private String groupCode;

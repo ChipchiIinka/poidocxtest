@@ -7,6 +7,7 @@ import com.example.poidocxtest.repository.DepartmentRepository;
 import com.example.poidocxtest.repository.SpecialityRepository;
 import com.example.poidocxtest.repository.TeacherRepository;
 import com.example.poidocxtest.service.mapper.entities.DepartmentMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class DepartmentService {
                 .map(teacher -> teacherRepo.findBySurnameAndNameAndPatronymic(
                         teacher.split(" ")[0], teacher.split(" ")[1], teacher.split(" ")[2])
                         .orElseThrow(() -> new RuntimeException("teacher not found")))
-                .collect(Collectors.toSet()));
+                .toList());
 
         department.setDepartmentSuperintendent(
                 teacherRepo.findByDepartmentAndPosition(department, Position.DEPARTMENT_SUPERINTENDENT)
@@ -45,7 +46,7 @@ public class DepartmentService {
         department.setSpecialities(dto.getSpecialityTitles().stream()
                 .map(speciality -> specialityRepo.findByTitle(speciality)
                         .orElseThrow(() -> new RuntimeException("speciality not found")))
-                .collect(Collectors.toSet()));
+                .toList());
 
         departmentRepo.save(department);
     }

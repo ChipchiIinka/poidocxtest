@@ -7,6 +7,7 @@ import com.example.poidocxtest.repository.FacultyRepository;
 import com.example.poidocxtest.repository.SubjectsRepository;
 import com.example.poidocxtest.repository.TeacherRepository;
 import com.example.poidocxtest.service.mapper.entities.TeacherMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class TeacherService {
         teacher.setSubjects(dto.getSubjectsTitle().stream()
                 .map(subject -> subjectsRepo.findByTitle(subject)
                         .orElseThrow(() -> new RuntimeException("teacher not found")))
-                .collect(Collectors.toSet()));
+                .toList());
         teacher.setFaculty(facultyRepo.findByTitle(dto.getFacultyTitle())
                 .orElseThrow(() -> new RuntimeException("faculty not found")));
 

@@ -6,6 +6,7 @@ import com.example.poidocxtest.repository.GroupRepository;
 import com.example.poidocxtest.repository.SpecialityRepository;
 import com.example.poidocxtest.repository.StudentRepository;
 import com.example.poidocxtest.service.mapper.entities.GroupMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class GroupService {
         group.setStudents(dto.getStudentNames().stream().map(s -> studentRepo.findBySurnameAndNameAndPatronymic(
                 s.split(" ")[0], s.split(" ")[1], s.split(" ")[2])
                 .orElseThrow(() -> new RuntimeException("student not found")))
-                .collect(Collectors.toSet()));
+                .toList());
         groupRepo.save(group);
     }
 }

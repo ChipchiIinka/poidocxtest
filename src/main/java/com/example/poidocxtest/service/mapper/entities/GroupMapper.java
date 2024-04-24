@@ -20,7 +20,7 @@ public class GroupMapper {
                 .specialityTitle(group.getSpeciality().getTitle())
                 .studentNames(group.getStudents().stream()
                         .map(Student::makeInitials)
-                        .collect(Collectors.toSet()))
+                        .toList())
                 .build();
     }
 

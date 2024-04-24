@@ -24,7 +24,7 @@ public class TeacherMapper {
                 .departmentTitle(teacher.getDepartment().getTitle())
                 .subjectsTitle(teacher.getSubjects().stream()
                         .map(Subjects::getTitle)
-                        .collect(Collectors.toSet()))
+                        .toList())
                 .facultyTitle(teacher.getFaculty().getTitle())
                 .build();
     }

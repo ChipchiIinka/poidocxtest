@@ -1,5 +1,6 @@
 package com.example.poidocxtest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,11 +29,21 @@ public class Student{
     private String patronymic;
 
     @OneToOne
-    @JoinColumn(name = "record_book")
+//    @JoinTable(
+//            name = "student_record_book",
+//            joinColumns = @JoinColumn(name = "record_book_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id")
+//    )
+    @JsonIgnoreProperties("recordBook")
     private RecordBook recordBook;
 
-    @ManyToOne
-    @JoinColumn(name = "study_group")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinTable(
+//            name = "group_students",
+//            joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id")
+//    )
+    @JsonIgnoreProperties("students")
     private Group group;
 
     public String makeInitials(){

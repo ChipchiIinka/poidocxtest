@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -18,5 +19,5 @@ public class GroupDto {
     private String specialityTitle;
 
     @JsonProperty("students")
-    private Set<String> studentNames;
+    private List<String> studentNames;
 }

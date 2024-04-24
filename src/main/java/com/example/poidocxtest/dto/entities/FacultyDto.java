@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -21,8 +22,8 @@ public class FacultyDto {
     private String decanterName;
 
     @JsonProperty("specialities")
-    private Set<String> specialitiesTitles;
+    private List<String> specialitiesTitles;
 
     @JsonProperty("teachers")
-    private Set<String> teachersName;
+    private List<String> teachersName;
 }

@@ -24,7 +24,7 @@ public class DepartmentMapper {
                 .departmentSuperintendentName(department.getDepartmentSuperintendent().makeInitials())
                 .specialityTitles(department.getSpecialities().stream()
                         .map(Speciality::getTitle)
-                        .collect(Collectors.toSet()))
+                        .toList())
                 .build();
     }
 

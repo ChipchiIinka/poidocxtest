@@ -17,7 +17,7 @@ public class StudentMapper {
                 .surname(student.getSurname())
                 .name(student.getName())
                 .patronymic(student.getPatronymic())
-                .recordBookId(student.getRecordBook().getId())
+                .recordBookNumber(student.getRecordBook().getNumber())
                 .groupCode(student.getGroup().getGroupCode())
                 .build();
     }

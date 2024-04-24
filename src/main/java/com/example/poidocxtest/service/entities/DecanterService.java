@@ -5,6 +5,7 @@ import com.example.poidocxtest.entity.Decanter;
 import com.example.poidocxtest.repository.DecanterRepository;
 import com.example.poidocxtest.repository.FacultyRepository;
 import com.example.poidocxtest.service.mapper.entities.DecanterMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

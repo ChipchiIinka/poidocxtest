@@ -6,6 +6,7 @@ import com.example.poidocxtest.repository.GroupRepository;
 import com.example.poidocxtest.repository.RecordBookRepository;
 import com.example.poidocxtest.repository.StudentRepository;
 import com.example.poidocxtest.service.mapper.entities.StudentMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class StudentService {
     public void create(StudentDto dto){
         Student student = studentMapper.toEntity(dto);
 
-        student.setRecordBook(recordBookRepo.findById(dto.getRecordBookId())
+        student.setRecordBook(recordBookRepo.findByNumber(dto.getRecordBookNumber())
                 .orElseThrow(()-> new RuntimeException("record book not found")));
         student.setGroup(groupRepo.findByGroupCode(dto.getGroupCode())
                 .orElseThrow(()-> new RuntimeException("group not found")));
