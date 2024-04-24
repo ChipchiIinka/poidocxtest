@@ -24,7 +24,7 @@ public class SubjectsDto {
     private int semester;
 
     @JsonProperty("teacher")
-    private String teacher;
+    private String teacherName;
 
     @JsonProperty("record_book")
     private String recordBookId;

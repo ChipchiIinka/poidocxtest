@@ -3,6 +3,7 @@ package com.example.poidocxtest.service.mapper.entities;
 import com.example.poidocxtest.dto.entities.TeacherDto;
 import com.example.poidocxtest.entity.Subjects;
 import com.example.poidocxtest.entity.Teacher;
+import com.example.poidocxtest.entity.enums.Position;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +35,14 @@ public class TeacherMapper {
         teacher.setSurname(dto.getSurname());
         teacher.setName(dto.getName());
         teacher.setPatronymic(dto.getPatronymic());
+
+        switch (dto.getPosition()) {
+            case "Department superintendent" -> teacher.setPosition(Position.DEPARTMENT_SUPERINTENDENT);
+            case "Professor" -> teacher.setPosition(Position.PROFESSOR);
+            case "Associate Professor" -> teacher.setPosition(Position.ASSOCIATE_PROFESSOR);
+            case "Senior lecturer" -> teacher.setPosition(Position.SENIOR_LECTURER);
+            default -> teacher.setPosition(Position.LECTURER);
+        }
 
         return teacher;
     }

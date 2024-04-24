@@ -6,11 +6,9 @@ import com.example.poidocxtest.service.mapper.util.UtilMapper;
 import com.example.poidocxtest.util.ExaminationSheetCreator;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.xmlbeans.XmlException;
 import org.springframework.stereotype.Service;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 
 @Service
@@ -31,13 +29,13 @@ public class UtilService {
                 .orElseThrow(() -> new RuntimeException("group not found"));
         Subjects subject = subjectsRepository.findById(subjectId)
                 .orElseThrow(() -> new RuntimeException("subject not found"));
-        Speciality speciality = specialityRepository.findByGroup(group)
+        Speciality speciality = specialityRepository.findByGroupsContaining(group)
                 .orElseThrow(() -> new RuntimeException("speciality not found"));
-        Faculty faculty = facultyRepository.findBySpeciality(speciality)
+        Faculty faculty = facultyRepository.findBySpecialitiesContaining(speciality)
                 .orElseThrow(() -> new RuntimeException("faculty not found"));
         Decanter decanter = decanterRepository.findByFaculty(faculty)
                 .orElseThrow(() -> new RuntimeException("decanter not found"));
-        Department department = departmentRepository.findBySpeciality(speciality)
+        Department department = departmentRepository.findBySpecialitiesContaining(speciality)
                 .orElseThrow(() -> new RuntimeException("department not found"));
         Secretary secretary = secretaryRepository.findById(secretaryId)
                 .orElseThrow(() -> new RuntimeException("secretary not found"));
@@ -51,5 +49,4 @@ public class UtilService {
         document.write(outputStream);
         document.close();
     }
-
 }

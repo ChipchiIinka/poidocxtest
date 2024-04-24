@@ -11,9 +11,12 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 public class RecordBookDto {
+    @JsonProperty("id")
+    private String id;
+
     @JsonProperty("student")
     private String studentName;
 
     @JsonProperty("subjects")
-    private Set<String> subjectsName;
+    private Set<String> subjectsTitle;
 }

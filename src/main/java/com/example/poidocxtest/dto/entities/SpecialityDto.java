@@ -18,14 +18,11 @@ public class SpecialityDto {
     private String specialityCode;
 
     @JsonProperty("groups")
-    private Set<String> groupNames;
+    private Set<String> groupCodes;
 
     @JsonProperty("department")
-    private String departmentName;
+    private String departmentTitle;
 
     @JsonProperty("faculty")
-    private String facultyName;
-
-    @JsonProperty("students")
-    private Set<String> students;
+    private String facultyTitle;
 }

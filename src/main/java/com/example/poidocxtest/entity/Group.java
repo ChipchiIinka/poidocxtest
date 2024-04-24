@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-@Table(name = "group")
+@Table(name = "study_group")
 public class Group {
     @Id
     @Column(name = "id")

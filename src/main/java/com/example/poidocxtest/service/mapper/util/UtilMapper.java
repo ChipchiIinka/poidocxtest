@@ -16,6 +16,7 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 public class UtilMapper {
+
     private long gradeCounter(List<Grade> grades, Grade grade){
         return grades.stream().map(g -> Objects.equals(g, grade)).count();
     }
@@ -27,9 +28,9 @@ public class UtilMapper {
     private String makeStudyYears (){
         if (Month.JANUARY.getValue() <= LocalDate.now().getMonth().getValue() &&
                 LocalDate.now().getMonth().getValue() < Month.SEPTEMBER.getValue()){
-            return String.valueOf(LocalDate.now().getYear()-1) + String.valueOf(LocalDate.now().getYear());
+            return (LocalDate.now().getYear()-1) + " - " + LocalDate.now().getYear();
         }
-        return String.valueOf(LocalDate.now().getYear()) + String.valueOf(LocalDate.now().getYear()+1);
+        return (LocalDate.now().getYear()) + " - " + (LocalDate.now().getYear() + 1);
     }
 
     public ExaminationSheetDto toDataDto (Decanter decanter, Faculty faculty,
@@ -56,7 +57,7 @@ public class UtilMapper {
         for (Student student : students) {
             studentSheetDto.add(StudentSheetDto.builder()
                     .fullName(student.getSurname() + " " + student.getName() + " " + student.getPatronymic())
-                    .recordBookNumber(student.getRecordBook().getId().toString())
+                    .recordBookNumber(student.getRecordBook().getId())
                     .grade(subject.getGrade().getName())
                     .build());
         }

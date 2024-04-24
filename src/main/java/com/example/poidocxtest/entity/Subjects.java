@@ -30,7 +30,7 @@ public class Subjects {
     private ControlType controlType;
 
     @Column(name = "semester")
-    private int semester;
+    private Integer semester;
 
     @ManyToOne
     @JoinColumn(name = "teacher")

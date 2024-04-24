@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -29,7 +27,7 @@ public class Speciality {
     private String specialityCode;
 
     @OneToMany
-    @JoinColumn(name = "group")
+    @JoinColumn(name = "study_groups")
     private Set<Group> groups;
 
     @ManyToOne
@@ -39,9 +37,5 @@ public class Speciality {
     @ManyToOne
     @JoinColumn(name = "faculty")
     private Faculty faculty;
-
-    @OneToMany
-    @JoinColumn(name = "students")
-    private Set<Student> students;
 }
 

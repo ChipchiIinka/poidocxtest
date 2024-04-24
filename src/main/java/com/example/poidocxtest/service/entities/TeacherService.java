@@ -2,7 +2,6 @@ package com.example.poidocxtest.service.entities;
 
 import com.example.poidocxtest.dto.entities.TeacherDto;
 import com.example.poidocxtest.entity.Teacher;
-import com.example.poidocxtest.entity.enums.Position;
 import com.example.poidocxtest.repository.DepartmentRepository;
 import com.example.poidocxtest.repository.FacultyRepository;
 import com.example.poidocxtest.repository.SubjectsRepository;
@@ -34,14 +33,6 @@ public class TeacherService {
 
     public void create(TeacherDto dto){
         Teacher teacher = teacherMapper.toEntity(dto);
-
-        switch (dto.getPosition()) {
-            case "Department superintendent" -> teacher.setPosition(Position.DEPARTMENT_SUPERINTENDENT);
-            case "Professor" -> teacher.setPosition(Position.PROFESSOR);
-            case "Associate Professor" -> teacher.setPosition(Position.ASSOCIATE_PROFESSOR);
-            case "Senior lecturer" -> teacher.setPosition(Position.SENIOR_LECTURER);
-            default -> teacher.setPosition(Position.LECTURER);
-        }
 
         teacher.setDepartment(departmentRepo.findByTitle(dto.getDepartmentTitle())
                 .orElseThrow(() -> new RuntimeException("department not found")));

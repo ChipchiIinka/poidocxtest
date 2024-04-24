@@ -23,7 +23,7 @@ public class RecordBook {
     @JoinColumn(name = "student")
     private Student student;
 
-    @ManyToMany
+    @OneToMany
     @JoinColumn(name = "subjects")
     private Set<Subjects> subjects;
 }
